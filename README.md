@@ -16,15 +16,33 @@ This simple plugin that adds a "first try" counter to your nvim statusline.
 
 ## Installation
 
-### lazy.nvim
-
-You can install notes.nvim using lazy.nvim by adding the following to
-your `init.lua` file:
+### Lazy
 
 ```lua
 return {
   "theacebutler/first-try.nvim",
-  lazy = true,
+ dependencies = {
+  "nvim-lualine/lualine.nvim",
+ },
+  config = function()
+    require("first-try").setup({
+      keymap = {
+        add = "+f",
+        subtract = "-f",
+      },
+    })
+  end
+}
+```
+
+### Packer
+
+```lua
+use {
+  "theacebutler/first-try.nvim",
+ dependencies = {
+  "nvim-lualine/lualine.nvim",
+ },
   config = function()
     require("first-try").setup({
       keymap = {
@@ -51,7 +69,15 @@ across sessions. Feel free to leave a PR with such a fetcher.
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a
-pull request to [the GitHub repo](https://github.com/theacebutler/first-try.nvim).
+pull request.
+
+## Roadmap (PRs welcome!)
+
+- [ ] Add a fetcher to keep track of the counter across sessions
+- [ ] Add support without lualine
+- [ ] Integrate with [nvim-navic](https://github.com/SmiteshP/nvim-navic)
+- [ ] Integrate with test runners and auto increment when a test passes for the
+      first time.
 
 ## License
 
